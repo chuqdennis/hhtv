@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                   <div class="ht__product__dtl">
-                    <h2>jean shirt to sassy girl</h2>
+                    <h2>Name of designer</h2>
                     <h6><i class="icon-tag icons"></i> <span>Ready-To-Wear</span></h6>
                     <h6><i class="icon-user icons"></i> <span>Female, Plus Size</span></h6>
                     <ul  class="pro__prize">
