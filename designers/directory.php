@@ -1,4 +1,10 @@
 <!doctype html>
+<?php 
+  include_once '../config/admin.php';
+  $site = new admin;
+  $query = "SELECT * FROM designers";
+  $designers = $site->getDesigners($query);
+ ?>
 <html class="no-js" lang="zxx">
 <head>
     <title>Directory</title>
@@ -55,59 +61,35 @@
                   <div class="shop__grid__view__wrap">
                     <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
                       <!-- Start Single Product -->
-                      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                        <div class="category">
-                          <div class="ht__cat__thumb">
-                            <a href="https://www.instagram.com/black_billionaire_fashionbrand">
-                              <img src="images/product/1.jpg" alt="product images">
-                            </a>
-                          </div>
-                          <div class="fr__product__inner">
-                            <h4><a href="https://www.instagram.com/black_billionaire_fashionbrand">Blackbillionare</a></h4>
-                            <p><i class="icon-tag icons"></i> Urban Street</p>
-                            <ul class="fr__pro__prize">
-                              <li class="old__prize">Check out</li>
-                              <li><a href="https://www.instagram.com/black_billionaire_fashionbrand"><i class="icon-social-instagram icons"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Start Single Product -->
-                      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                        <div class="category">
-                          <div class="ht__cat__thumb">
-                            <a href="https://www.instagram.com/mosesjamin">
-                              <img src="images/product/2.jpg" alt="product images">
-                            </a>
-                          </div>
-                          <div class="fr__product__inner">
-                            <h4><a href="https://www.instagram.com/mosesjamin">Jaminmoon Designs</a></h4>
-                            <p><i class="icon-tag icons"></i> Ready-to-wear</p>
-                            <ul class="fr__pro__prize">
-                              <li class="old__prize">Check out</li>
-                              <li><a href="https://www.instagram.com/mosesjamin"><i class="icon-social-instagram icons"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Start Single Product -->
-                      <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                        <div class="category">
-                          <div class="ht__cat__thumb">
-                            <a href="https://www.instagram.com/houseofposh1">
-                              <img src="images/product/3.jpg" alt="product images">
-                            </a>
-                          </div>
-                          <div class="fr__product__inner">
-                            <h4><a href="https://www.instagram.com/houseofposh1">House of Posh</a></h4>
-                            <p><i class="icon-tag icons"></i> Couture</p>
-                            <ul class="fr__pro__prize">
-                              <li class="old__prize">Check out</li>
-                              <li><a href="https://www.instagram.com/houseofposh1"><i class="icon-social-instagram icons"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
+                      <?php 
+                          if (count($designers) < 1) {
+                            echo '<div class="col-md-12"><center><h2>No designer found</h2></center></div>';
+                          }else{
+                            foreach ($designers as $key => $des) {
+                            ?>
+                              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="category">
+                                  <div class="ht__cat__thumb">
+                                    <a href="details.php?designer=<?=$des->designer_id ?>">
+                                      <img src="images/<?=$des->pc_1 ?>" alt="product images">
+                                    </a>
+                                  </div>
+                                  <div class="fr__product__inner">
+                                    <h4><a href="details.php?designer=<?=$des->designer_id ?>"><?=$des->designer_name ?></a></h4>
+                                    <p><i class="icon-tag icons"></i> <?=$des->style ?></p>
+                                    <ul class="fr__pro__prize">
+                                      <li class="old__prize">Check out</li>
+                                      <li><a href="<?=$des->ig_link ?>" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            <?php
+                            }
+                          }
+                       ?>
+                      
+
                     </div>
                   </div>
                 </div>

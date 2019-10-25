@@ -1,4 +1,15 @@
 <!doctype html>
+<?php 
+  include_once '../config/admin.php';
+  $site = new admin;
+  if (!isset($_GET['designer'])) {
+    echo '<script>location.href="index.php"</script>';
+  }else{
+    $designer = $site->getty('designer');
+    $query = "SELECT * FROM designers WHERE designer_id='$designer' ";
+    $info = $site->getDesignerInfo($query);
+  }
+ ?>
 <html class="no-js" lang="zxx">
 <head>
     <title>Details</title>
@@ -27,7 +38,7 @@
                       <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
                       <a class="breadcrumb-item" href="directory.php">Directory</a>
                       <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                      <span class="breadcrumb-item active">brandNameOfDesigner</span>
+                      <span class="breadcrumb-item active"><?=$info->designer_name ?></span>
                     </nav>
                   </div>
                 </div>
@@ -48,13 +59,13 @@
                     <div class="product__big__images">
                       <div class="portfolio-full-image tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                          <img src="images/product-2/big-img/1.jpg" alt="full-image">
+                          <img src="images/<?=$info->pc_1 ?>" alt="full-image">
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
-                          <img src="images/product-2/big-img/2.jpg" alt="full-image">
+                          <img src="images/<?=$info->pc_2 ?>" alt="full-image">
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
-                          <img src="images/product-2/big-img/3.jpg" alt="full-image">
+                          <img src="images/<?=$info->pc_3 ?>" alt="full-image">
                         </div>
                       </div>
                     </div>
@@ -63,17 +74,17 @@
                     <ul class="product__small__images" role="tablist">
                       <li role="presentation" class="pot-small-img active">
                         <a href="#img-tab-1" role="tab" data-toggle="tab">
-                          <img src="images/product-2/sm-img-3/3.jpg" alt="small-image">
+                          <img src="images/<?=$info->pc_1 ?>" alt="small-image">
                         </a>
                       </li>
                       <li role="presentation" class="pot-small-img">
                         <a href="#img-tab-2" role="tab" data-toggle="tab">
-                          <img src="images/product-2/sm-img-3/1.jpg" alt="small-image">
+                          <img src="images/<?=$info->pc_2 ?>" alt="small-image">
                         </a>
                       </li>
                       <li role="presentation" class="pot-small-img">
                         <a href="#img-tab-3" role="tab" data-toggle="tab">
-                          <img src="images/product-2/sm-img-3/2.jpg" alt="small-image">
+                          <img src="images/<?=$info->pc_3 ?>" alt="small-image">
                         </a>
                       </li>
                     </ul>
@@ -82,31 +93,31 @@
                 </div>
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                   <div class="ht__product__dtl">
-                    <h2>Name of designer</h2>
-                    <h6><i class="icon-tag icons"></i> <span>Ready-To-Wear</span></h6>
-                    <h6><i class="icon-user icons"></i> <span>Female, Plus Size</span></h6>
+                    <h2><?=$info->designer_name ?></h2>
+                    <h6><i class="icon-tag icons"></i> <span><?=$info->style ?></span></h6>
+                    <h6><i class="icon-user icons"></i> <span><?=$info->gender ?></span></h6>
                     <ul  class="pro__prize">
                       <li class="old__prize">Check out on </li>
-                      <li><a href="https://www.instagram.com/mosesjamin"><i class="icon-social-instagram icons"></i></a></li>
+                      <li><a href="<?=$info->ig_link ?>" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
                     </ul>
-                    <p class="pro__info">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p>
+                    <p class="pro__info"><?=$info->bio ?></p>
                     <div class="ht__pro__desc">
                       <div class="sin__desc">
-                        <p><span>Store:</span> 11, Elekahia Road, Rebisis, Port Harcourt.</p>
+                        <p><span>Store:</span> <?=$info->store_addr ?>.</p>
                       </div>
                       <div class="sin__desc">
-                        <p><span>State:</span> Rivers State</p>
+                        <p><span>State:</span> <?=$info->state ?></p>
                       </div>
                       <div class="sin__desc">
-                        <p><span>Phone:</span> 0809 123 4567</p>
+                        <p><span>Phone:</span> <?=$info->bus_phone ?></p>
                       </div>
                       <div class="sin__desc">
-                        <p><span>Biz email:</span> designer@email.com</p>
+                        <p><span>Biz email:</span> <?=$info->bus_email ?></p>
                       </div>
                       <div class="sin__desc align--left">
                         <p><span>Categories:</span></p>
                         <ul class="pro__cat__list">
-                          <li><a href="#">Urban,</a></li>
+                          <li><a href="#"><?=$info->style ?>,</a></li>
                           <li><a href="#">Ready-To-Wear,</a></li>
                           <li><a href="#">Avante Garde,</a></li>
                         </ul>
@@ -116,7 +127,7 @@
                         <p><span>Share this:</span></p>
                         <ul class="pro__share">
                           <li><a href="#" target="_blank"><i class="icon-social-twitter icons"></i></a></li>
-                          <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
+                          <li><a href="<?=$info->ig_link ?>" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
                           <li><a href="#" target="_blank"><i class="icon-social-facebook icons"></i></a></li>
                         </ul>
                       </div>
